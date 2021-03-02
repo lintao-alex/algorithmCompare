@@ -7,6 +7,7 @@ import {InsertionSort2} from "../common/InsertionSort2";
 import {IClass} from "../interface";
 import {SortCompare} from "../common/SortCompare";
 import {MergeSortNoRecursive} from "../common/MergeSortNoRecursive";
+import {MergeSort} from "../common/MergeSort";
 
 function isListElementMatch(list1: number[], list2: number[]){
     list1 = list1.slice()
@@ -31,9 +32,9 @@ function unitTest(sortClass: IClass<SortCompare>) {
 
 }
 function compare(...sortClassList: IClass<SortCompare>[]) {
-    let max = 10000
-    // let dataSource = createRandomList(max,1,max)
-    let dataSource = range(1,max)
+    let max = 100000
+    let dataSource = createRandomList(max,1,max)
+    // let dataSource = range(1,max)
     for(let c of sortClassList) {
         let sort = new c()
         let list = dataSource.slice()
@@ -47,7 +48,7 @@ function compare(...sortClassList: IClass<SortCompare>[]) {
     }
 }
 function main() {
-    // unitTest(MergeSortLocal)
-    compare(MergeSortNoRecursive, InsertionSort2, InsertionSort)
+    // unitTest(MergeSort)
+    compare(MergeSort, MergeSortNoRecursive, InsertionSort2, InsertionSort)
 }
 main()

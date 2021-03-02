@@ -41,14 +41,11 @@ export abstract class SortCompare extends BaseCompare {
         return lowIdx
     }
 
-    /***
-     * data at lowIdx will be useless
-     */
-    protected moveSlice(list: number[], lowIdx: number, heightIdx: number) {
+    protected moveSlice(list: number[], sourceLowIdx: number, sourceHeightIdx: number, delta=1) {
         this.MarkOption(2)
-        for(let i=heightIdx; i>lowIdx; --i) {
+        for(let i=sourceHeightIdx; i>=sourceLowIdx; --i) {
             this.MarkOption()
-            list[i] = list[i-1]
+            list[i+delta] = list[i]
 
             this.MarkOption(2)
         }

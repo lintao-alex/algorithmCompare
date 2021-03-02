@@ -11,7 +11,7 @@ export class InsertionSort2 extends InsertionSort {
 
         this.MarkOption()
         if(insertIdx<checkIdx) {
-            this.moveSlice(list, insertIdx, checkIdx)
+            this.moveSlice(list, insertIdx, checkIdx-1)
             this.MarkOption()
             list[insertIdx] = check
         }

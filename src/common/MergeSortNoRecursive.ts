@@ -34,7 +34,7 @@ export class MergeSortNoRecursive extends SortCompare{
             let insertIdx = this.binarySearchInsertIdx(list, start1, end1, check)
             this.MarkOption()
             if(insertIdx==checkIdx) break
-            this.moveSlice(list, insertIdx, checkIdx)
+            this.moveSlice(list, insertIdx, checkIdx-1)
 
             this.MarkOption(3)
             list[insertIdx] = check
