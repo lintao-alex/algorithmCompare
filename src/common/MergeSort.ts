@@ -20,7 +20,7 @@ export class MergeSort extends SortCompare {
         this.merge(list, lowIdx, middleIdx, heightIdx)
     }
 
-    private merge(list: number[], lowIdx: number, middleIdx: number, heightIdx: number) {
+    protected merge(list: number[], lowIdx: number, middleIdx: number, heightIdx: number) {
         this.MarkOption(3)
         let tempList: number[] = []
         let leftIdx = lowIdx

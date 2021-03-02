@@ -25,22 +25,37 @@ export class MergeSortNoRecursive extends SortCompare{
         }
     }
 
-    private merge(list: number[], start1: number, end1: number, start2: number, end2: number) {
+    protected merge(list: number[], start1: number, end1: number, start2: number, end2: number) {
+        let lowIdx = start1
+        let middleIdx = start2
+        let heightIdx = end2
+        this.MarkOption(3)
+        let tempList: number[] = []
+        let leftIdx = lowIdx
+        let rightIdx = middleIdx
+
         this.MarkOption(2)
-        for(let checkIdx=start2; checkIdx<=end2; ++checkIdx) {
+        while (leftIdx<middleIdx && rightIdx<=heightIdx) {
+            if (this.needChange(list[leftIdx], list[rightIdx])) {
+                this.MarkOption(2)
+                tempList.push(list[rightIdx])
+                ++rightIdx
+            } else {
+                this.MarkOption(2)
+                tempList.push(list[leftIdx])
+                ++leftIdx
+            }
+        }
+
+        this.MarkOption()
+        if(leftIdx<middleIdx) {
+            this.moveSlice(list, leftIdx, middleIdx-1, heightIdx-middleIdx+1)
+        }
+
+        this.MarkOption(2)
+        for(let i=0,len=tempList.length; i<len; ++i) {
             this.MarkOption()
-            let check=list[checkIdx]
-
-            let insertIdx = this.binarySearchInsertIdx(list, start1, end1, check)
-            this.MarkOption()
-            if(insertIdx==checkIdx) break
-            this.moveSlice(list, insertIdx, checkIdx-1)
-
-            this.MarkOption(3)
-            list[insertIdx] = check
-            start1 = insertIdx+1
-            end1 = checkIdx
-
+            list[lowIdx+i] = tempList[i]
             this.MarkOption(2)
         }
     }
