@@ -3,7 +3,7 @@
  */
 import {SortCompare} from "./SortCompare";
 
-export class MergeSortLocal extends SortCompare{
+export class MergeSortNoRecursive extends SortCompare{
     protected doSort(list: number[]): void {
         this.MarkOption(2)
         for(let delta=1,len=list.length; delta<len; delta+=delta) {
@@ -32,6 +32,8 @@ export class MergeSortLocal extends SortCompare{
             let check=list[checkIdx]
 
             let insertIdx = this.binarySearchInsertIdx(list, start1, end1, check)
+            this.MarkOption()
+            if(insertIdx==checkIdx) break
             this.moveSlice(list, insertIdx, checkIdx)
 
             this.MarkOption(3)

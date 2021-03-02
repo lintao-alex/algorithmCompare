@@ -9,9 +9,11 @@ export class InsertionSort2 extends InsertionSort {
         let check = list[checkIdx]
         let insertIdx = this.binarySearchInsertIdx(list, 0, checkIdx-1, check)
 
-        this.moveSlice(list, insertIdx, checkIdx)
-
         this.MarkOption()
-        list[insertIdx] = check
+        if(insertIdx<checkIdx) {
+            this.moveSlice(list, insertIdx, checkIdx)
+            this.MarkOption()
+            list[insertIdx] = check
+        }
     }
 }
