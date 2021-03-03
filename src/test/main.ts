@@ -9,10 +9,13 @@ import {SortCompare} from "../common/SortCompare";
 import {MergeSortNoRecursive} from "../common/MergeSortNoRecursive";
 import {MergeSort} from "../common/MergeSort";
 import {isListElementMatch, isSorted} from "../utils/SortTest";
+import {ShellSort} from "../common/ShellSort";
+import {MergeSortNoRecursiveLocal} from "../common/MergeSortNoRecursiveLocal";
+import {ShellSort2} from "../common/ShellSort2";
 
 function unitTest(sortClass: IClass<SortCompare>) {
     console.log("unitTest: ",sortClass.name)
-    let max = 100000
+    let max = 10
     let list = createRandomList(max,1,max)
     let orgList = list.slice()
     let sort = new sortClass()
@@ -25,7 +28,7 @@ function unitTest(sortClass: IClass<SortCompare>) {
 
 }
 function compare(...sortClassList: IClass<SortCompare>[]) {
-    let max = 100000
+    let max = 10000
     let dataSource = createRandomList(max,1,max)
     // let dataSource = range(1,max)
     for(let c of sortClassList) {
@@ -41,7 +44,7 @@ function compare(...sortClassList: IClass<SortCompare>[]) {
     }
 }
 function main() {
-    // unitTest(MergeSort)
-    compare(MergeSort, MergeSortNoRecursive)
+    // unitTest(ShellSort2)
+    compare(MergeSortNoRecursive, MergeSortNoRecursiveLocal, ShellSort2, InsertionSort)
 }
 main()

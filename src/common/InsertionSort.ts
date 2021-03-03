@@ -17,16 +17,20 @@ export class InsertionSort extends SortCompare{
         let check = list[checkIdx]
 
         this.MarkOption(2)
-        for(let i=checkIdx-1; i>=0; --i) {
-            if(this.needChange(list[i], check)) {
+        let idx=checkIdx-1
+        while(idx>=0) {
+            if(this.needChange(list[idx], check)) {
                 this.MarkOption()
-                list[i+1] = list[i]
+                list[idx+1] = list[idx]
             } else {
-                this.MarkOption()
-                list[i+1] = check
                 break
             }
+
             this.MarkOption(2)
+            --idx
         }
+
+        this.MarkOption()
+        list[idx+1] = check
     }
 }
