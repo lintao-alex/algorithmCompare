@@ -8,21 +8,11 @@ import {IClass} from "../interface";
 import {SortCompare} from "../common/SortCompare";
 import {MergeSortNoRecursive} from "../common/MergeSortNoRecursive";
 import {MergeSort} from "../common/MergeSort";
-import {MergeSortLocal} from "../common/MergeSortLocal";
-import {MergeSortNoRecursiveLocal} from "../common/MergeSortNoRecursiveLocal";
+import {isListElementMatch, isSorted} from "../utils/SortTest";
 
-function isListElementMatch(list1: number[], list2: number[]){
-    list1 = list1.slice()
-    for(let v2 of list2) {
-        let idx = list1.indexOf(v2)
-        if(idx<0) return false
-        list1.splice(idx, 1)
-    }
-    return list1.length==0
-}
 function unitTest(sortClass: IClass<SortCompare>) {
     console.log("unitTest: ",sortClass.name)
-    let max = 1000
+    let max = 100000
     let list = createRandomList(max,1,max)
     let orgList = list.slice()
     let sort = new sortClass()
@@ -30,7 +20,7 @@ function unitTest(sortClass: IClass<SortCompare>) {
     sort.sort(list)
     console.log("sorted: ",list)
     console.log("option: ",sort.optionCnt)
-    console.log("isOk? ",sort.isOk(list))
+    console.log("isOk? ",isSorted(list))
     console.log("isListElementMatch? ",isListElementMatch(orgList, list))
 
 }
@@ -44,14 +34,14 @@ function compare(...sortClassList: IClass<SortCompare>[]) {
         console.time(c.name)
         sort.sort(list)
         console.timeEnd(c.name)
-        console.log("isOK? ", sort.isOk(list))
+        console.log("isOK? ", isSorted(list))
         console.log("option: ",sort.optionCnt)
 
         console.log("")
     }
 }
 function main() {
-    // unitTest(MergeSortNoRecursive)
-    compare(MergeSort, MergeSortNoRecursive, MergeSortLocal, MergeSortNoRecursiveLocal, InsertionSort2, InsertionSort)
+    // unitTest(MergeSort)
+    compare(MergeSort, MergeSortNoRecursive)
 }
 main()

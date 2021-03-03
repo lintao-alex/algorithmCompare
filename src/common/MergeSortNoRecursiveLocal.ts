@@ -5,21 +5,24 @@ import {MergeSortNoRecursive} from "./MergeSortNoRecursive";
 
 export class MergeSortNoRecursiveLocal extends MergeSortNoRecursive {
 
-    protected merge(list: number[], start1: number, end1: number, start2: number, end2: number) {
+    protected merge(list: number[], prevLowIdx: number, nextLowIdx: number, nextHeightIdx: number) {
+        this.MarkOption()
+        let prevHeightIdx = nextLowIdx-1
+
         this.MarkOption(2)
-        for(let checkIdx=start2; checkIdx<=end2; ++checkIdx) {
+        for(let checkIdx=nextLowIdx; checkIdx<=nextHeightIdx; ++checkIdx) {
             this.MarkOption()
             let check=list[checkIdx]
 
-            let insertIdx = this.binarySearchInsertIdx(list, start1, end1, check)
+            let insertIdx = this.binarySearchInsertIdx(list, prevLowIdx, prevHeightIdx, check)
             this.MarkOption()
             if(insertIdx==checkIdx) break
             this.moveSlice(list, insertIdx, checkIdx-1)
 
             this.MarkOption(3)
             list[insertIdx] = check
-            start1 = insertIdx+1
-            end1 = checkIdx
+            prevLowIdx = insertIdx+1
+            prevHeightIdx = checkIdx
 
             this.MarkOption(2)
         }

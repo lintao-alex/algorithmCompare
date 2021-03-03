@@ -21,34 +21,6 @@ export class MergeSort extends SortCompare {
     }
 
     protected merge(list: number[], lowIdx: number, middleIdx: number, heightIdx: number) {
-        this.MarkOption(3)
-        let tempList: number[] = []
-        let leftIdx = lowIdx
-        let rightIdx = middleIdx
-
-        this.MarkOption(2)
-        while (leftIdx<middleIdx && rightIdx<=heightIdx) {
-            if (this.needChange(list[leftIdx], list[rightIdx])) {
-                this.MarkOption(2)
-                tempList.push(list[rightIdx])
-                ++rightIdx
-            } else {
-                this.MarkOption(2)
-                tempList.push(list[leftIdx])
-                ++leftIdx
-            }
-        }
-
-        this.MarkOption()
-        if(leftIdx<middleIdx) {
-            this.moveSlice(list, leftIdx, middleIdx-1, heightIdx-middleIdx+1)
-        }
-
-        this.MarkOption(2)
-        for(let i=0,len=tempList.length; i<len; ++i) {
-            this.MarkOption()
-            list[lowIdx+i] = tempList[i]
-            this.MarkOption(2)
-        }
+        this.mergeSortedNeighbourList(list, lowIdx, middleIdx, heightIdx)
     }
 }

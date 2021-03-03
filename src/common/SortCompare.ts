@@ -8,9 +8,9 @@ export abstract class SortCompare extends BaseCompare {
         this.doSort(list)
     }
 
-    isOk(list: number[]) {
-        return !list.some((v,i,l)=>i>0&&this.needChange(l[i-1],v),this)
-    }
+    // isOk(list: number[]) {
+    //     return !list.some((v,i,l)=>i>0&&this.needChange(l[i-1],v),this)
+    // }
 
     protected needChange(prev: number, next: number) {
         this.MarkOption()
@@ -48,6 +48,50 @@ export abstract class SortCompare extends BaseCompare {
             list[i+delta] = list[i]
 
             this.MarkOption(2)
+        }
+    }
+
+    /***
+     * nextLowIdx must be greater than prevLowIdx(no equal)
+     */
+    protected mergeSortedNeighbourList(list: number[], prevLowIdx: number, nextLowIdx: number, nextHeightIdx: number) {
+        if(prevLowIdx>=nextLowIdx) return
+        //TODO: compare height and low, maybe can return direct or be easier
+
+        this.MarkOption()
+        let tempIdx = nextHeightIdx-nextLowIdx
+        this.MarkOption((tempIdx+1)*3)
+        let tempList = list.slice(nextLowIdx, nextHeightIdx+1)
+
+        this.MarkOption()
+        let prevIdx = nextLowIdx-1
+
+        this.MarkOption(2)
+        for(let trgIdx=nextHeightIdx; trgIdx>=prevLowIdx; --trgIdx) {
+            if(this.needChange(list[prevIdx], tempList[tempIdx])) {
+                this.MarkOption()
+                list[trgIdx] = list[prevIdx]
+
+                this.MarkOption()
+                if(prevIdx==prevLowIdx) {
+                    this.MarkOption()
+                    while(tempIdx>=0) {
+                        this.MarkOption(3)
+                        list[--trgIdx] = tempList[tempIdx--]
+                    }
+                    return
+                }
+
+                this.MarkOption()
+                --prevIdx
+            } else {
+                this.MarkOption(2)
+                list[trgIdx] = tempList[tempIdx]
+                if (tempIdx == 0) return
+
+                this.MarkOption()
+                --tempIdx
+            }
         }
     }
 }
