@@ -8,38 +8,30 @@ export class QuickSort extends SortCompare{
         this.dealUnit(list, 0, list.length-1)
     }
 
-    private dealUnit(list: number[], lowIdx: number, heightIdx: number) {
+    protected dealUnit(list: number[], lowIdx: number, heightIdx: number) {
         this.MarkOption(2)
-        let trgIdx = lowIdx
+        let partitionIdx = lowIdx
 
 
         this.MarkOption(3)
-        let tail = list[heightIdx]
+        let pivot = list[heightIdx]
         for(let checkIdx=lowIdx; checkIdx<heightIdx; ++checkIdx) {
             this.MarkOption()
             let check = list[checkIdx]
-            if(!this.needChange(check, tail)) {
-                this.swap(list, checkIdx, trgIdx)
+            if(!this.needChange(check, pivot)) {
+                this.swap(list, checkIdx, partitionIdx)
                 this.MarkOption()
-                ++trgIdx
+                ++partitionIdx
             }
 
             this.MarkOption(2)
         }
-        this.swap(list, trgIdx, heightIdx)
+        this.swap(list, partitionIdx, heightIdx)
 
-        this.MarkOption()
-        if(trgIdx+1<heightIdx) {
-            this.dealUnit(list, trgIdx+1, heightIdx)
-        }
-        this.MarkOption()
-        if(trgIdx-1>lowIdx) {
-            this.dealUnit(list, lowIdx, trgIdx-1)
-        }
+        this.MarkOption(2)
+        if(partitionIdx+1<heightIdx) this.dealUnit(list, partitionIdx+1, heightIdx)
+        this.MarkOption(2)
+        if(partitionIdx-1>lowIdx) this.dealUnit(list, lowIdx, partitionIdx-1)
     }
 
-    private swap(list: number[], idxA: number, idxB: number) {
-        this.MarkOption(3);
-        [list[idxA], list[idxB]] = [list[idxB], list[idxA]]
-    }
 }

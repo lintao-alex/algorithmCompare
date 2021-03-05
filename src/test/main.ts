@@ -13,10 +13,11 @@ import {ShellSort} from "../common/ShellSort";
 import {MergeSortNoRecursiveLocal} from "../common/MergeSortNoRecursiveLocal";
 import {ShellSort2} from "../common/ShellSort2";
 import {QuickSort} from "../common/QuickSort";
+import {QuickSortStable} from "../common/QuickSortStable";
 
 function unitTest(sortClass: IClass<SortCompare>) {
     console.log("unitTest: ",sortClass.name)
-    let max = 10
+    let max = 2
     let list = createRandomList(max,1,max)
     let orgList = list.slice()
     let sort = new sortClass()
@@ -29,7 +30,7 @@ function unitTest(sortClass: IClass<SortCompare>) {
 
 }
 function compare(...sortClassList: IClass<SortCompare>[]) {
-    let max = 100000
+    let max = 1000000
     let dataSource = createRandomList(max,1,max)
     // let dataSource = range(1,max)
     for(let c of sortClassList) {
@@ -45,7 +46,7 @@ function compare(...sortClassList: IClass<SortCompare>[]) {
     }
 }
 function main() {
-    unitTest(QuickSort)
-    // compare(MergeSortNoRecursive, QuickSort, InsertionSort)
+    // unitTest(QuickSortStable)
+    compare(QuickSort,QuickSortStable)
 }
 main()

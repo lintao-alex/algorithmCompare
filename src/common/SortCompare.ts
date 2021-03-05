@@ -94,5 +94,10 @@ export abstract class SortCompare extends BaseCompare {
             }
         }
     }
+
+    protected swap(list: number[], idxA: number, idxB: number) {
+        this.MarkOption(3);
+        [list[idxA], list[idxB]] = [list[idxB], list[idxA]]
+    }
 }
 
