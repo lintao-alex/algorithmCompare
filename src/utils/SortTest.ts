@@ -12,13 +12,21 @@ export function isSorted(list: number[], judgeCall?: (a: number, b: number)=>boo
 }
 
 export function isListElementMatch(list1: number[], list2: number[]) {
-    list1 = list1.slice()
-    for(let v2 of list2) {
-        let idx = list1.indexOf(v2)
-        if(idx<0) return false
-        list1.splice(idx, 1)
+    let map = new Map<number, number>()
+    for(let v of list1) {
+        let cnt = map.get(v) || 0
+        map.set(v, cnt+1)
     }
-    return list1.length==0
+    for(let v of list2) {
+        if(!map.has(v)) return false
+        let cnt = map.get(v) as number
+        if(cnt==1) {
+            map.delete(v)
+        } else {
+            map.set(v, cnt-1)
+        }
+    }
+    return map.size==0
 }
 
 function notGreater(a: number, b: number) {
