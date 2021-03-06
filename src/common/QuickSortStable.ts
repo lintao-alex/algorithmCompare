@@ -7,23 +7,21 @@ export class QuickSortStable extends QuickSort {
     protected dealUnit(list: number[], lowIdx: number, heightIdx: number) {
         this.MarkOption(4)
         let pivot = list[heightIdx]
-        let partitionIdx = lowIdx
-        let rightIdx = heightIdx
+        let checkIdx = lowIdx
+        let partitionIdx = heightIdx
 
-        while (partitionIdx < rightIdx) {
-            if(this.needChange(list[partitionIdx], pivot)) {
+        while (checkIdx < partitionIdx) {
+            if(this.needChange(list[checkIdx], pivot)) {
                 this.MarkOption(2)
-                while(--rightIdx > partitionIdx) {
-                    if(!this.needChange(list[rightIdx], pivot)) {
-                        this.swap(list, partitionIdx, rightIdx)
+                while(--partitionIdx > checkIdx) {
+                    if(!this.needChange(list[partitionIdx], pivot)) {
+                        this.swap(list, checkIdx, partitionIdx)
                         break
                     }
                 }
-                this.MarkOption()
-                if(rightIdx==partitionIdx) break
             }
             this.MarkOption()
-            ++partitionIdx
+            ++checkIdx
         }
         this.swap(list, partitionIdx, heightIdx)
 

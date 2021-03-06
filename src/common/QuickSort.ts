@@ -16,9 +16,7 @@ export class QuickSort extends SortCompare{
         this.MarkOption(3)
         let pivot = list[heightIdx]
         for(let checkIdx=lowIdx; checkIdx<heightIdx; ++checkIdx) {
-            this.MarkOption()
-            let check = list[checkIdx]
-            if(!this.needChange(check, pivot)) {
+            if(!this.needChange(list[checkIdx], pivot)) {
                 this.swap(list, checkIdx, partitionIdx)
                 this.MarkOption()
                 ++partitionIdx
