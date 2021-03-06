@@ -1,9 +1,10 @@
 /**
  * Created by lintao_alex on 2021/3/5
+ * another way to deal inPlace sort
  */
 import {QuickSort} from "./QuickSort";
 
-export class QuickSortStable extends QuickSort {
+export class QuickSort2 extends QuickSort {
     protected dealUnit(list: number[], lowIdx: number, heightIdx: number) {
         this.MarkOption(4)
         let pivot = list[heightIdx]
